@@ -1,0 +1,168 @@
+'
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <!--先导入css和js  -->
+    <link rel="stylesheet" href="css/swiper.min.css">
+
+    <link rel="stylesheet" href="css/index.css">
+
+    <script src="js/swiper.min.js"></script>
+
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide one">
+                <!--logo  -->
+                <img src="img/logo.png" alt="">
+                <!--中间的文字，用div包起来是为了动画和方便管理  -->
+                <div class="text">
+                    <img src="img/text_1.png" alt="">
+                    <img src="img/text_2.png" alt="">
+                    <img src="img/text_3.png" alt="">
+                    <img src="img/text_4.png" alt="">
+                    <img src="img/text_5.png" alt="">
+                    <img src="img/text_6.png" alt="">
+                    <img src="img/text_7.png" alt="">
+                    <img src="img/text_8.png" alt="">
+                </div>
+                <img src="img/info_1.png" alt="">
+            </div>
+
+            <!--第二页  -->
+            <div class="swiper-slide two">
+
+                <div class="shield">
+                    <img src="img/shield_1.png" alt="">
+                    <img src="img/shield_2.png" alt="">
+                    <img src="img/shield_3.png" alt="">
+                    <img src="img/shield_4.png" alt="">
+                    <img src="img/shield_5.png" alt="">
+                    <img src="img/shield_6.png" alt="">
+                    <img src="img/shield_7.png" alt="">
+                    <img src="img/shield_8.png" alt="">
+                    <img src="img/shield_9.png" alt="">
+                </div>
+
+                <div class="info">
+                    <!--如果发现用flex布局img的时候，img变形了，那么其实只要用一个div把它包起来就能解决  -->
+                    <img src="img/info_2.png" alt="">
+                </div>
+            </div>
+
+            <!--第三页  -->
+            <div class="swiper-slide three">
+                <div class="info">
+                    <img src="img/info_3.png" alt="">
+                </div>
+
+                <div class="circle">
+                    <img src="img/circle.png" alt="">
+                </div>
+
+                <div class="rocket">
+                    <img src="img/rocket.png" alt="">
+                </div>
+            </div>
+
+            <!--第四页  -->
+            <div class="swiper-slide four">
+                <div class="searchBox">
+                    <img src="img/search.png" alt="">
+                    <div class="key"></div>
+                    <div class="result"><img src="img/result.png" alt=""></div>
+                </div>
+
+                <div class="info">
+                    <img src="img/info_4.png" alt="">
+                </div>
+            </div>
+
+            <!--第五页  -->
+            <div class="swiper-slide five">
+                <div class="info">
+                    <img src="img/info_5.png" alt="">
+                </div>
+
+                <div class="browser">
+
+
+                    <div class="line top"></div>
+                    <div class="line right"></div>
+                    <div class="line bottom"></div>
+                    <div class="line left"></div>
+
+                    <img src="img/toolbar.png" alt="">
+
+                    <img class="extra" src="img/extra.png" alt="">
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+
+<script>
+    var mySwiper = new Swiper('.swiper-container', {
+
+        direction: 'vertical',
+
+        // 开启使用鼠标滚轮翻页
+        mousewheelControl: true,
+
+        // 翻页完成
+        onSlideChangeEnd: function (swiper) {
+
+            // 把原来的动画都删掉
+            var pageList = document.querySelectorAll('.swiper-slide');
+
+            for (var i = 0; i < pageList.length; i++) {
+
+                pageList[i].classList.remove('animation');
+
+            }
+
+            // 得到当前页的索引，换算成元素的索引
+            var index = swiper.activeIndex + 1;
+
+            // 找到某页的元素
+            var page = document.querySelector('.swiper-slide:nth-child(' + index + ')');
+
+            page.classList.add('animation');
+        }
+
+    })
+
+    // 以下代码都只是为了启动时让第一页就有动画效果
+
+    window.onload = function () {
+
+        document.querySelector('.swiper-slide').classList.add('animation');
+    }
+
+</script>
+
+</html>'

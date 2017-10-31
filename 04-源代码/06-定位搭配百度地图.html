@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+        body,
+        html,
+        #allmap {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+    </style>
+
+    <!--导入百度地图的api  -->
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=K8PVIR30Y44WuuAV1kwCxKr4pNmQSG9T"></script>
+
+    <!--网页标题  -->
+    <title>黑马</title>
+
+</head>
+
+<body>
+    <!--就是用来装地图的容器  -->
+    <div id="allmap"></div>
+</body>
+
+</html>
+
+<script type="text/javascript">
+    navigator.geolocation.getCurrentPosition(function (loc) {
+
+        // 百度地图API功能（初始化地图对象）
+        var map = new BMap.Map("allmap");
+        // 设置一个坐标点，第一个参数是经度，第二个参数是纬度
+        var point = new BMap.Point(loc.coords.longitude, loc.coords.latitude);
+        // 把你刚刚写的坐标设置为地图的中心点，并且设置显示精度，最大精度是19
+        map.centerAndZoom(point, 12);
+
+        var marker = new BMap.Marker(point);  // 创建标注
+        map.addOverlay(marker);               // 将标注添加到地图中
+        marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+
+
+
+        // 创建地址解析器实例
+        var myGeo = new BMap.Geocoder();
+        // 将地址解析结果显示在地图上,并调整地图视野
+        // 通过getPoint的方法是可以让你传入一个地址，得到一个的坐标，它会把坐标当作参数传递给这个方法的回调函数，不管成功与否都会调用，不成功的话，返回的参数point为空
+        // 参数3设置默认城市，那样的话，前面的参数1可以省略市
+        myGeo.getPoint("中粮商务公园", function (point) {
+
+            if (point) {
+
+                map.centerAndZoom(point, 19);
+                map.addOverlay(new BMap.Marker(point));
+            } else {
+                alert("您选择地址没有解析到结果!");
+            }
+        }, "深圳市");
+    })
+
+</script>

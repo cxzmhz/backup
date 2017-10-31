@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+    本文件知识点：
+
+        file元素的onchange事件
+            当选中的文件发生改变会来触发
+  -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            border: 4px dashed black;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="file">
+
+    <div class="box"></div>
+</body>
+
+<script>
+    // 需要找到file元素
+    // 当选中的文件发生变化立即触发
+    document.querySelector('input').onchange = function () {
+
+        // 先读取选中的文件
+        //this.files[0];
+
+        var reader = new FileReader();
+
+        reader.readAsDataURL(this.files[0]);
+
+        // 读取完毕后，把它显示在box里面
+        reader.onload = function () {
+
+            document.querySelector('div').style.background = 'url(' + reader.result + ')'
+        }
+    };
+
+</script>
+
+</html>

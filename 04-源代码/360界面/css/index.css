@@ -1,0 +1,245 @@
+.one{
+
+    background: deepskyblue;
+    display: flex;
+    /*主轴变为y轴  */
+    flex-direction: column;
+    /*主轴上有间距  */
+    justify-content: space-around;
+    /*副轴（x轴）上居中  */
+    align-items: center;
+}
+
+.two{
+
+    background: yellowgreen;
+    display: flex;
+    /*主轴上有间距  */
+    justify-content: space-around;
+    /*副轴（y轴）上居中  */
+    align-items: center;
+}
+
+.two>.shield{
+    /*让盾牌左边有间距  */
+    margin-left: 20px;
+    flex: 2;
+}
+
+.two>.info{
+    flex: 3;
+}
+
+.three{
+
+    background: orange;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+}
+
+.three>.rocket{
+
+    position: absolute;
+    right: 160px;
+}
+
+.four{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: seagreen;
+}
+
+.searchBox{
+    position: relative;
+}
+
+.key{
+
+    position: absolute;
+    top: 25px;
+    left: 20px;
+    width: 99px;
+    height: 22px;
+    background: url('../img/key.png');
+}
+
+.five{
+
+    background: skyblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.browser{
+
+    position: relative;
+    width: 1004px;
+    flex: 1;
+}
+
+.line{
+    background: white;
+    position: absolute;
+}
+
+.top,.bottom{
+    width: 1004px;
+    height: 4px;
+}
+
+.left,.right{
+
+    width: 4px;
+    height: 480px;
+}
+
+.top{
+    top: 0;
+}
+
+.right{
+    right: 0;
+}
+
+.bottom{
+    bottom: 8px;
+}
+
+.left{
+    left: 0;
+}
+
+.extra{
+
+    position: absolute;
+    bottom: 8px;
+    right: 0;
+}
+
+/*找到第一页里，再找到里面的text盒子，再找到里面每一个img  */
+.one>.text>img{
+
+    margin-right: 20px;
+}
+
+/*必须要同时满足有one这个类和animation这个类  */
+.one.animation >.text>img{
+
+    transition: all 1s;
+    margin-right: 0;
+}
+
+.two>.shield>img:nth-child(3){
+
+    transform: translate(400px,200px) rotate(280deg);
+}
+
+.two.animation>.shield>img:nth-child(3){
+    transition: all 1s;
+    transform: none;
+}
+
+
+/*第三页动画  */
+.three .rocket{
+
+    right: 1000px;
+    bottom: -204px;
+}
+
+.three.animation .rocket{
+
+    transition: all 1s;
+    right: 160px;
+    bottom: 180px;
+}
+
+
+/*第四页动画,先让搜索盒子整体往左边移动  */
+.four .searchBox{
+
+    transform: translateX(-600px);
+}
+
+.four .key{
+    width: 0;
+}
+
+.four .result{
+    overflow: hidden;
+    height: 0;
+}
+
+.four.animation .searchBox{
+
+    transition: all 1s;
+    transform: none;
+}
+
+/*注意：第四个文字的效果，如果文字直接用的是img，那么它的效果就不好看：就只是从左上到右下展开的效果
+
+如果一个div包起img，记得再加overflow为hidden也可以达到我们想要效果
+
+或者div里面什么都不写，直接给它一个宽高，并且给一个background也是一样的效果
+*/
+.four.animation .key{
+
+    transition: all 1s 1s steps(5);
+    width: 99px;
+}
+
+.four.animation .result{
+
+    transition: all 1s 2s;
+    height: 372px;
+}
+
+.five{
+    overflow: hidden;
+}
+
+/*第五页  */
+.five .top{
+
+    left: -1204px;
+}
+
+.five .left{
+
+    bottom: -500px;
+}
+
+.five .right{
+
+    top: -650px;
+}
+
+.five .bottom{
+
+    right: -1204px;
+}
+
+.five.animation .top{
+    transition: all 1s;
+    left: 0;
+}
+
+.five.animation .left{
+    transition: all 1s;
+    bottom: 0;
+}
+
+.five.animation .right{
+    transition: all 1s;
+    top: 0;
+}
+
+.five.animation .bottom{
+    transition: all 1s;
+    right:0;
+}

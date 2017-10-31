@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        .box {
+            width: 150px;
+            height: 150px;
+            background: red;
+        }
+        /*交集：必须同时满足这两个才能命中  */
+
+        .box.animation {
+            transition: all 1s;
+            transform: translate(1000px, 300px);
+        }
+        /*鼠标移入触发，那么你鼠标动一下肯定就没有移入的状态，所以就复原  */
+
+        .box:hover {
+            transition: all 1s;
+            transform: translate(1000px, 300px);
+        }
+    </style>
+</head>
+
+<body>
+    <input type="button" value="点我">
+
+    <div class="box"></div>
+</body>
+
+<script>
+    document.querySelector('input').onclick = function () {
+
+        var divDom = document.querySelector('.box');
+
+        divDom.classList.add('animation');
+    };
+
+</script>
+
+</html>

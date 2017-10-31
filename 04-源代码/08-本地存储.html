@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+    本文件知识点：
+        localStorage 用来存储数据，特点：只要自己不删永远都在
+            setItem('key',值);  这是存储
+            getItem('key'); 这是取值
+            removeItem('key');这是删除某个值
+
+
+        sessionStorage 也是存储数据，但是会自动删除，用法跟上面的完全一样
+
+
+        
+  -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text">
+
+    <button>存储</button>
+
+    <button id='del'>删除</button>
+</body>
+
+<script>
+    // 本地存储
+    //    localStorage 只要自己不删，它一直都在
+    //    sessionStorage 是一次性的，会自动删除，一次会话结束后就删了：关掉浏览器就没了   
+    document.querySelector('button').onclick = function () {
+
+        // 要拿到文本框，然后才能它里面的值
+        var value = document.querySelector('input').value;
+
+        // 存储起来
+        // window.localStorage.setItem('name', value);
+
+        window.sessionStorage.setItem('name', value);
+    };
+
+    document.querySelector('#del').onclick = function () {
+
+        localStorage.removeItem('name');
+    };
+
+
+    window.onload = function () {
+
+        // 从本地取值
+        // var value = window.localStorage.getItem('name');
+
+        var value = window.sessionStorage.getItem('name');
+
+        // 再赋值给文本框
+        document.querySelector('input').value = value;
+    }
+
+</script>
+
+</html>

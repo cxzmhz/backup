@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="复习swiper/css/swiper.min.css">
+
+    <script src="复习swiper/js/swiper.min.js"></script>
+
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+
+        .abc {
+            transition: all 1s;
+            transform: translate(1000px, 300px);
+        }
+        /*我就可以限制每个页面显示不同的颜色了  */
+
+        .one.bg {
+            background: yellow;
+        }
+
+        .two.bg {
+            background: green;
+        }
+
+        .three.bg {
+            background: orange;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="swiper-container">
+
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide one">Slide 1</div>
+            <div class="swiper-slide two">
+
+            </div>
+            <div class="swiper-slide three">Slide 3</div>
+        </div>
+
+    </div>
+
+</body>
+
+<script>
+    var mySwiper = new Swiper('.swiper-container', {
+        direction: 'vertical',
+
+        // 如果开启了循环，页面索引从1开始，没开启循环从0开始
+        // loop: true,
+
+        // 开启使用鼠标滚轮翻页
+        mousewheelControl: true,
+
+        onSlideChangeEnd: function (swiper) {
+
+            // console.log(swiper.activeIndex);
+            // if (swiper.activeIndex == 1) {
+            //     document.querySelector('.box').classList.add('abc');
+            // } else {
+
+            //     document.querySelector('.box').classList.remove('abc');
+            // }
+
+            var index = swiper.activeIndex + 1;
+
+            var currentPage = document.querySelector('.swiper-slide:nth-child(' + index + ')');
+
+            currentPage.classList.add('bg');
+        }
+
+
+    })
+
+</script>
+
+</html>

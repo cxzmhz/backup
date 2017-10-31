@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="button" value="点我定位">
+</body>
+
+
+<script>
+    document.querySelector('input').onclick = function () {
+
+        // 通过此方法可以去服务器请求自己的位置
+        // 定位有两个条件：1.要么有GPS模块，连接上卫星定位（最精确）
+        // 2.联网，通过你的网络ip去查询服务器上的地址（不太精确）
+        // 当获取到位置成功后就会调用的函数，这个函数你要参数传进去
+        // 获取到的位置信息会当作参数传给这个回调函数
+        window.navigator.geolocation.getCurrentPosition(function (loc) {
+
+            console.log('您所在的位置纬度是：' + loc.coords.latitude + '经度是：', +loc.coords.longitude);
+        })
+    }
+
+</script>
+
+</html>

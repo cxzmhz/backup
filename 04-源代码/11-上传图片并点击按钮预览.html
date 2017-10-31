@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+    本文件知识点：
+            1.如何拿到file元素的上传文件？
+                    file元素.files 就能拿到所有上传的
+                    如果是单选，直接file元素.files[0]
+
+            2.file元素拿到的文件，还只是文件的信息，我们要把它读取出来，就需要用到文件读取对象
+
+                new FileReader();
+
+
+            3.如何读取？
+                文件读取对象.readAsDataURL(文件信息)
+
+
+            4.注意点：
+                调用readAsDataURL方法后不一定立即读取完，所以如果我们要拿读取到的结果，一定要等它读取完毕
+
+                怎么等？
+                    调用文件读取器的onload事件，这个事件会绑定一个方法，当读取完毕，就会调用这个方法，所以我们在这个方法里就可以拿读取后的文件结果了
+
+  -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="file">
+
+    <button>预览</button>
+</body>
+
+<script>
+    document.querySelector('button').onclick = function () {
+
+        //拿到上传的元素
+        var fileDom = document.querySelector('input');
+
+        // 因为现在默认文件上传是只能上传一个
+        // 它会把所有上传的文件都存在file元素的files数组里
+        // 因为只允许上传一个，所以这个数组只有一个元素，那么你取只要通过第0个下标就能取
+        // console.log(fileDom.files[0]);
+
+        // 文件读取器
+        var reader = new FileReader();
+
+        // 读取方法
+        // 文件可能很大，读取文件也是一种耗时操作
+        reader.readAsDataURL(fileDom.files[0]);
+
+        reader.result
+        // 当文件读取完毕才会调用这个回调函数
+        reader.onload = function () {
+
+            // 结果你看不懂，但是浏览器看得懂，既然浏览器看得懂，我直接丢给浏览器解析就行了
+            // console.log(reader.result);
+
+            document.body.style.background = 'url(' + reader.result + ')';
+        }
+
+    }
+
+</script>
+
+</html>

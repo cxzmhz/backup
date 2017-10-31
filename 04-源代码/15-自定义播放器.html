@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--controls这个属性可以让视频有控制条，但是不同浏览器显示的效果是不一样的，如果你需要保持一个风格，就需要自定义
+  -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <!--使用字体图标步骤；
+    
+        1.先把css和font两个文件夹都放到自己项目里
+        2.导入css文件进行 font-awesome.min.css
+        3.你想要什么图标，就把这个图标的名字作为你想加到的元素的类里
+    -->
+
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+
+    <style>
+        body {
+            background: black;
+        }
+
+        .player {
+            width: 458px;
+            height: 508px;
+            border: 4px solid white;
+            display: flex;
+            flex-direction: column;
+            margin: 50px auto;
+        }
+
+        .player>video {
+            width: 100%;
+            height: 458px;
+        }
+
+        .player>.control {
+            width: 100%;
+            flex: 1;
+            background: hotpink;
+
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .control>a {
+
+            margin: 10px;
+            text-decoration: none;
+            font-size: 40px;
+            color: white;
+        }
+
+        .progressBar {
+            flex: 1;
+            height: 30px;
+            background: white;
+        }
+
+        .progress {
+
+            background: gray;
+            height: 100%;
+            width: 0%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="player">
+        <video src="movie/bglb.mp4"></video>
+
+        <div class="control">
+            <a id='play' class='icon-play-circle' href="javascript:void(0)"></a>
+            <a id='pause' class='icon-pause' href="javascript:void(0)"></a>
+
+            <div class="progressBar">
+                <div class="progress"></div>
+            </div>
+
+            <a id='full' class="icon-fullscreen" href="javascript:void(0)"></a>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    // 获取video元素
+    var videoDom = document.querySelector('video');
+
+    // 点击了播放
+    document.querySelector('#play').onclick = function () {
+
+        // console.log('...');
+        videoDom.play();
+    };
+
+    // 点击了暂停
+    document.querySelector('#pause').onclick = function () {
+
+        videoDom.pause();
+    }
+
+    // 点击了全屏
+    document.querySelector('#full').onclick = function () {
+
+        videoDom.webkitRequestFullScreen();
+    }
+
+    // 点击了进度条
+    document.querySelector('.progressBar').onclick = function (event) {
+        // console.log('...');
+        // 要得到你点击的位置，然后用位置除以进度条总宽度得到百分比
+        // event里有一个属性叫offsetX，这个可以获得你点击位置的水平值
+        // 我们用offsetX  / 当前元素的offsetWidth（总宽度）就能得到比例
+        // console.log(event);
+
+        var percent = event.offsetX / this.offsetWidth;
+        // console.log(percent);
+
+        // 找到里面的进度值
+        document.querySelector('.progress').style.width = percent * 100 + '%';
+
+        // 视频元素的duration能获得视频的总时长
+        // 视频元素的currentTime能获取或者设置当前播放的时间
+
+        videoDom.currentTime = videoDom.duration * percent;
+    };
+
+
+    // 监听video的播放位置已更改事件（每播放一秒都会触发）
+    videoDom.ontimeupdate = function () {
+
+        // console.log('正在播放');
+        // 用当前的播放的时间除以总时长，就得到视频播放的百分比进度
+        var percent = videoDom.currentTime / videoDom.duration;
+
+        // 再把这个进度赋值给里面的进度条
+        document.querySelector('.progress').style.width = percent * 100 + '%';
+    }
+
+</script>
+
+</html>

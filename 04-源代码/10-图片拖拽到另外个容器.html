@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+    本文件仅仅是用上一个知识点来做了个案例
+
+    思路：
+        给每个img添加开始拖拽方法，并在开始拖拽方法里记录这个img
+
+        然后在容器的drop方法里添加这个img
+        
+  -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        div {
+            width: 400px;
+            height: 500px;
+            border: 1px solid black;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        img {
+            width: 100px;
+            height: 100px;
+            margin-right: 10px;
+        }
+
+        .container {
+
+            position: absolute;
+            right: 20px;
+            top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <img src="img/lofter_1_noval_icon_ (1).jpg" alt="">
+        <img src="img/lofter_1_noval_icon_ (2).jpg" alt="">
+        <img src="img/lofter_1_noval_icon_ (3).jpg" alt="">
+        <img src="img/lofter_1_noval_icon_ (4).jpg" alt="">
+        <img src="img/lofter_1_noval_icon_ (5).jpg" alt="">
+        <img src="img/lofter_1_noval_icon_ (6).jpg" alt="">
+        <img src="img/lofter_1_noval_icon_ (7).jpg" alt="">
+        <img src="img/lofter_1_noval_icon_ (8).jpg" alt="">
+        <img src="img/lofter_1_noval_icon_ (9).jpg" alt="">
+        <img src="img/lofter_1_noval_icon_ (10).jpg" alt="">
+    </div>
+
+    <div class="container"></div>
+</body>
+
+<script>
+    var currentDom;
+
+    // 得到所有img元素
+    var imgList = document.querySelectorAll('img');
+
+    for (var i = 0; i < imgList.length; i++) {
+
+        imgList[i].ondragstart = function () {
+
+            // console.log(this);
+            currentDom = this;
+        }
+    }
+
+    document.querySelector('.container').ondrop = function () {
+
+        this.appendChild(currentDom);
+    };
+
+    document.querySelector('.container').ondragover = function (event) {
+
+        event.preventDefault();
+    }
+
+</script>
+
+</html>

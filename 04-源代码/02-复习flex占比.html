@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+    如果是x轴为主轴，那么flex确定的是宽度
+    如果是y轴为主轴，那么flex确定的是高度
+  -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        ul {
+            list-style: none;
+            padding: 0;
+            width: 400px;
+            height: 400px;
+            border: 1px solid black;
+            margin: 50px auto;
+
+            /*默认x轴方向为主轴  */
+            display: flex;
+        }
+
+        li {
+            background: yellowgreen;
+        }
+        /*
+            一条线，一共长400米，甲同学拿走20%，乙同学拿走30%，丙同学拿走50%，那么每个人拿走多少？？
+            80米
+            120米
+            200米
+
+
+            一条线，一共长400米，一共要给3个同学分，甲同学拿走2份，乙同学拿走3份，丙同学拿走5份，那么每个人拿走多少？？
+
+            这条线被分成了10份
+
+
+            一条线，一共长300米，一共要给3个同学分，甲同学拿走1份，乙同学拿走2份，丙同学拿走4份，那么每个人拿走多少？？
+
+            一共分成7份
+
+            300 * 1/7
+
+            300 * 2/7
+
+
+        */
+
+        li:first-child {
+            /*单独设置某一个元素在副轴上的位置  */
+            /* align-self: flex-end; */
+            /*确定宽度  */
+            flex: 3;
+            /*
+             宽度 * 3 / 总分数
+
+             宽度/总分数*3
+            */
+            height: 100px;
+        }
+
+        li:nth-child(2) {
+            flex: 1;
+            height: 100px;
+        }
+
+        li:last-child {
+            flex: 16;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+
+</body>
+
+</html>

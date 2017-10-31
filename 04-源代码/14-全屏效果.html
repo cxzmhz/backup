@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <button>全屏</button>
+    <div class="box"></div>
+</body>
+
+<script>
+    document.querySelector('button').onclick = function () {
+
+        var boxDom = document.querySelector('.box');
+
+        // 这个方法还是一个实验室中的方法，所以必须加浏览器的前缀标识
+        // boxDom.requestFullscreen();
+
+        if (boxDom.webkitRequestFullscreen) {
+
+            // boxDom.webkitRequestFullscreen();
+            boxDom.webkitRequestFullScreen();
+        }
+        else if (boxDom.mozRequestFullScreen) {
+
+            boxDom.mozRequestFullScreen();
+
+        } else if (boxDom.msRequestFullscreen) {
+
+            boxDom.msRequestFullscreen();
+        }
+    };
+
+</script>
+
+</html>

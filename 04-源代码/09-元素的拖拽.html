@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+    有些元素默认不能拖，如果希望它有拖动效果
+    就给它写个属性叫 draggable = 'true'
+
+    ondragstart 当元素开始拖拽触发
+    ondrag   当元素正在拖拽触发
+    ondragend 当元素停止拖拽触发
+
+    ondrop 当某个容器检测到有元素移入并且松手后触发
+        但是要让这个事件触发，必须先实现这个容器的ondragover事件，并且这个事件需要一个event参数，再调用event.preventDefault()方法
+  -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        .box {
+            width: 150px;
+            height: 150px;
+            background: red;
+        }
+
+        .container {
+            width: 300px;
+            height: 400px;
+            border: 1px solid black;
+            position: absolute;
+
+            top: 50px;
+            right: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!--元素不是你想拖，想拖就能拖，让我写个属性draggable  -->
+    <img src="img/shq.jpg" alt="">
+
+    <div class="box" draggable="true"></div>
+
+    <div class="container"></div>
+
+</body>
+
+<script>
+    var boxDom = document.querySelector('.box');
+
+    // 当某个被拖拽的元素开始拖拽触发
+    boxDom.ondragstart = function () {
+
+        console.log('你开始拖我了');
+    }
+
+    // 当某个被拖拽元素正在拖拽时触发
+    boxDom.ondrag = function () {
+
+        console.log('你正在拖我');
+    }
+
+    // 当某个被拖拽元素结束拖拽（松手）时触发
+    boxDom.ondragend = function () {
+
+        console.log('你不拖我了');
+    }
+
+    var containerDom = document.querySelector('.container');
+
+    // 检测我这个容器有没有元素进来
+    containerDom.ondragenter = function () {
+
+        console.log('有元素进来了');
+    }
+
+    // 检测我这个容器有没有元素出去
+    containerDom.ondragleave = function () {
+
+        console.log('有元素离开了');
+    }
+
+    // 当有元素拖拽到容器里面并且松手后才触发
+    // 但是这个事件使用之前必须先使用ondragover的事件，并且这个over事件必须接收参数，再调用参数的preventDefault()方法，否则这个事件永远不会触发
+    containerDom.ondrop = function () {
+
+        // console.log('..................');
+
+        // 写死了，永远加的都是红色的盒子
+        this.appendChild(boxDom);
+    }
+
+    // 这个方法仅仅只是为了让ondrop事件能触发
+    containerDom.ondragover = function (event) {
+
+        event.preventDefault();
+    }
+
+</script>
+
+</html>
